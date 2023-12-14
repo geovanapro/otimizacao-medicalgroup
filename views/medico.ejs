@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    .clinica {
+      color: aliceblue;
+    }
+
+    footer {
+      background-color: #4bbeeb;
+      color: #fff;
+      padding: 5px;
+      text-align: center;
+    }
+
+    /* Estilizando os links no footer */
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    /* Estilizando os links no hover (quando o mouse passa por cima) */
+    footer a:hover {
+      text-decoration: underline;
+    }
+   
+   
+  </style>
+ <title>Página Inicial médico</title>
+ <nav class="navbar navbar-expand-sm bg-info navbar-dark fixed-top">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="#">
+        <img src="https://github.com/bgaby7/medicalg/blob/main/imgcadastro/user.png?raw=true" alt="MEDICAL GROUP" style="width:35px;" class="rounded-pill">
+        <a class="navbar-brand"><h4 style="color: #fff;"> MEDICAL GROUP HOSPITAL </h4></a>
+            </div>
+        <div class="dropdown" bg-info>
+          <button type="button" class="btn btn-outline-light dropdown-toggle" data-bs-toggle="dropdown">
+              Menu
+          </button>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/">Início</a></li>
+          </ul>
+      </div>
+</nav>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="coverback">
+  <div class="container">
+    <br>
+    <br>
+    <br>
+    <h1>CONSULTAS</h1>
+    <table class="table table-hover" id="tabela1" border="1">
+      <thead>
+        <tr>
+          <th>Nome e Sobrenome</th>
+          <th>Horário da Consulta</th>
+          <th>Data da Consulta</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+     
+      <tr>
+          <div>
+            <% consultas.forEach(consultas => { %>
+            <th><%= consultas.Nome %></th>
+            <th>(<%= consultas.Hora %>)</th>  
+            <th>(<%= consultas.Data %>)</th>
+            </div>
+          <td>
+            <button class="btn btn-outline-info" onclick="moveToFinalizadas(this)">Finalizada</button>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <h1>FINALIZADAS</h1>
+    <table class="table table-hover" id="tabela2" border="1">
+      <thead>
+        <tr>
+          <th>Nome e Sobrenome</th>
+          <th>Horário da Consulta</th>
+          <th>Data da Consulta</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be added dynamically here -->
+      </tbody>
+    </table>
+
+    <br>
+    <!-- Button to Open the Modal -->
+    <center>
+      <div class="d-grid"><button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
+          data-bs-target="#myModal">
+          Prontuário
+        </button></div>
+    </center>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">IMPRIMIR</h4>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <a href="https://github.com/bgaby7/medicalg/blob/main/medico/prontuario.png?raw=true" download>Arquivo em PDF</a>
+          </div>
+
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+<br>
+<br>
+<br>
+  <footer>
+    <p>&copy; 2023 Medical Group - Todos os direitos reservados.</p>
+    <p>Entre em contato: hospital.medicalup@gmail.com</p>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Serviço</a>
+  </footer>
+
+  <script>
+    function moveToFinalizadas(button) {
+        // Obtém a referência para a linha da tabela 1
+        var linhaTabela1 = button.parentNode.parentNode;
+
+        // Clona a linha
+        var novaLinha = linhaTabela1.cloneNode(true);
+
+        // Remove o botão "Finalizada" da nova linha
+        novaLinha.lastElementChild.innerHTML = '';
+
+        // Adiciona a nova linha à tabela 2
+        document.getElementById('tabela2').getElementsByTagName('tbody')[0].appendChild(novaLinha);
+
+        // Remove a linha da tabela 1
+        linhaTabela1.parentNode.removeChild(linhaTabela1);
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
